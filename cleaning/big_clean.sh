@@ -1,9 +1,17 @@
 #!/bin/bash
 
 tar -zxf $1 --directory $2
-cd big_dir
 
-#SAFETY FIRST
-var1="DELETE"
-rm $(grep "${var1} ME!" $(ls) -l)
+dirString=$1
+newDir=${dirString/.tgz}
+
+cd $newDir
+
+#SAFETY FIRST!
+deleteStr="DELETE"
+rm $(grep "${deleteStr} ME!" $(ls) -l)
+
+cleanedStr="../cleaned_${newDir}.tgz"
+tar -czf $cleanedStr ../$newDir 
+
 echo "done"
